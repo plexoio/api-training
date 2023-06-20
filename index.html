@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="content">
+
+    </div>
+
+    <script>
+        // fetch('https://ci-swapi.herokuapp.com/api/')
+        //     .then(response => response.json()) // chaining fetch().then().then();
+        //     .then(parsedResponse => {
+        //         document.getElementById('content').innerText = `${parsedResponse.people} \n ----200 OK----`; // or ['people']
+        //     }).catch((brokenPromise) => {
+        //         if (brokenPromise) {
+        //             let actualError = `Actual error is: ${brokenPromise}`;
+        //             console.error(actualError); // if server is down or wrong request, etc.
+        //             document.getElementById('content').innerText = actualError;
+        //         }
+        //     });
+
+        // chaining fetch().then().then().catch();
+
+        fetch('https://ci-swapi.herokuapp.com/api/')
+            .then(response => response.json())
+            .then(parsedResponse => displayData(parsedResponse)).catch((brokenPromise) => handleError(brokenPromise));
+        
+        // CALLBACK functions for the retrieving and displaying from the API
+
+        function displayData(data) {
+            document.getElementById('content').innerText = `${data.people} \n\n ----200 OK----`; // or ['people']
+        };
+
+        function handleError(error) {
+            if (error) {
+                let actualError = `Actual error is: ${error}`;
+                console.error(actualError); // if server is down or wrong request, etc.
+                document.getElementById('content').innerText = actualError;
+            }
+        }
+    </script>
+</body>
+
+</html>
